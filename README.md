@@ -4,11 +4,5 @@
 
 Demo to compare:
 
-- [v1](https://warrenseine.github.io/ua-parser-test/v1.html)
-- [v2](https://warrenseine.github.io/ua-parser-test/v2.html)
-
-Running the demo:
-
-```bash
-bunx serve .
-```
+- [v1](./v1.html)
+- [v2](./v2.html)
