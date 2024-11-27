@@ -1,20 +1,29 @@
 <html>
   <head>
-    <script src="https://cdn.jsdelivr.net/npm/ua-parser-js/dist/ua-parser.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/ua-parser-js@2.0.0/dist/ua-parser.min.js"
+      integrity="sha512-0HjSwUWCye2MP4eYR2DvZRQoRQ2p0/HjPAtBPsDp/cfkR9ugCW9aSAnJ2FWvPZ7hyuFRf6D1HqrKUMsLYULEYQ=="
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      pre {
+        padding: 4px;
+      }
+    </style>
   </head>
   <body>
-    <pre id="container" style="font-size: 60px"></pre>
+    <p>
+      <code>ua-parser-js v2.0.0</code>
+    </p>
+    <pre id="container"></pre>
     <script>
-      async function run() {
-        const parser = new UAParser();
-        document.getElementById("container").innerText = JSON.stringify(
-          await parser.getResult().withClientHints(),
-          null,
-          2
-        );
-      }
+      const parser = new UAParser();
 
-      run();
+      (async () => {
+        const results = await parser.getResult().withClientHints();
+
+        document.getElementById("container").innerText = JSON.stringify(results, null, 2);
+      })();
     </script>
   </body>
 </html>
