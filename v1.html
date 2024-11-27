@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/UAParser.js/1.0.37/ua-parser.min.js" integrity="sha512-LAchvH0Y4sxYM1ouOaqHQ6WbSXvOgkioPaiyW0oPOFNNMNfpsBEpvzYmsxgDf8pQM/fMaMdxYP/nFenquTAkdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+  <body>
+    <pre id="container" style="font-size: 60px"></pre>
+    <script>
+      async function run() {
+        const parser = new UAParser();
+        document.getElementById("container").innerText = JSON.stringify(
+          parser.getResult(),
+          null,
+          2
+        );
+      }
+
+      run();
+    </script>
+  </body>
+</html>
