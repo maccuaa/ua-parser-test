@@ -1,0 +1,11 @@
+del {
+  text-decoration: none;
+}
+
+pre {
+  padding: 16px;
+}
+
+footer {
+  color: var(--pico-muted-color);
+}
