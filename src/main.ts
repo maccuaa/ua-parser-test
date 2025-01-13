@@ -1,8 +1,25 @@
 import { UAParser as UAParserV1 } from "ua-parser-js-1";
 import { UAParser as UAParserV2 } from "ua-parser-js-2";
+import { UAParser as MyUaParser } from 'my-ua-parser'
 import { diffJson } from "diff";
 import "@picocss/pico";
 import "./style.css";
+
+const calcDiff = (id: string, result1: any, result2: any) => {
+  const diff = diffJson(result1, result2);
+
+  const diffElement = document.getElementById(id);
+  const fragment = document.createDocumentFragment();
+
+  diff.forEach((part) => {
+    const elem = document.createElement(part.added ? "ins" : part.removed ? "del" : "span");
+    elem.appendChild(document.createTextNode(part.value));
+    fragment.appendChild(elem);
+  });
+
+  diffElement?.appendChild(fragment);
+}
+
 
 (async () => {
   //
@@ -22,19 +39,20 @@ import "./style.css";
   const results_v2 = await parser_v2.getResult().withClientHints();
 
   //
+  // Load my-ua-parser
+  //
+
+  const parser_my = new MyUaParser();
+  const results_my = parser_my.getResult();
+
+  //
   // Calculate Diff
   //
 
-  const diff = diffJson(results_v1, results_v2);
+  calcDiff("diff", results_v1, results_v2);
 
-  const diffElement = document.getElementById("diff");
-  const fragment = document.createDocumentFragment();
-
-  diff.forEach((part) => {
-    const elem = document.createElement(part.added ? "ins" : part.removed ? "del" : "span");
-    elem.appendChild(document.createTextNode(part.value));
-    fragment.appendChild(elem);
-  });
-
-  diffElement?.appendChild(fragment);
+  calcDiff("diff-my-ua-parser", results_v1, results_my);
+  
+  
 })();
+
